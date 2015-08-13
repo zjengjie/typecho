@@ -295,7 +295,5 @@ class Typecho_Response
         } else if (!empty($default)) {
             $this->redirect($default);
         }
-        
-        exit;
     }
 }

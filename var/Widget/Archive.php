@@ -687,20 +687,6 @@ class Widget_Archive extends Widget_Abstract_Contents
     }
 
     /**
-     * 默认的非首页归档处理
-     *
-     * @access private
-     * @param Typecho_Db_Query $select 查询对象
-     * @param boolean $hasPushed 是否已经压入队列
-     * @return void
-     * @throws Typecho_Widget_Exception
-     */
-    private function archiveEmptyHandle(Typecho_Db_Query $select, &$hasPushed)
-    {
-        throw new Typecho_Widget_Exception(_t('请求的地址不存在'), 404);
-    }
-
-    /**
      * 404页面处理
      *
      * @access private
@@ -1264,8 +1250,8 @@ class Widget_Archive extends Widget_Abstract_Contents
         $handles = array(
             'index'                     =>  'indexHandle',
             'index_page'                =>  'indexHandle',
-            'archive'                   =>  'archiveEmptyHandle',
-            'archive_page'              =>  'archiveEmptyHandle',
+            'archive'                   =>  'error404Handle',
+            'archive_page'              =>  'error404Handle',
             404                         =>  'error404Handle',
             'single'                    =>  'singleHandle',
             'page'                      =>  'singleHandle',
@@ -1832,11 +1818,11 @@ class Widget_Archive extends Widget_Abstract_Contents
             }
         }
 
-        /** 输出header */
-        echo $header;
-
         /** 插件支持 */
         $this->pluginHandle()->header($header, $this);
+
+        /** 输出header */
+        echo $header;
     }
 
     /**

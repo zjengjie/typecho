@@ -696,11 +696,9 @@ class Widget_Abstract_Contents extends Widget_Abstract
         }
 
         /** 处理Markdown **/
-        if (isset($value['text'])) {
-            $value['isMarkdown'] = (0 === strpos($value['text'], '<!--markdown-->'));
-            if ($value['isMarkdown']) {
-                $value['text'] = substr($value['text'], 15);
-            }
+        $value['isMarkdown'] = (0 === strpos($value['text'], '<!--markdown-->'));
+        if ($value['isMarkdown']) {
+            $value['text'] = substr($value['text'], 15);
         }
 
         /** 生成聚合链接 */

@@ -3,7 +3,7 @@
 <?php
 $engine = '';
 
-if (defined('SAE_MYSQL_DB') && SAE_MYSQL_DB != "app_") {
+if (defined('SAE_MYSQL_DB')) {
     $engine = 'SAE';
 } else if (!!getenv('HTTP_BAE_ENV_ADDR_SQL_IP')) {
     $engine = 'BAE';
