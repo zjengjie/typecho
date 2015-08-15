@@ -69,8 +69,8 @@ class HighLight_Plugin implements Typecho_Plugin_Interface{
         $style = Typecho_Widget::widget('Widget_Options')->plugin('HighLight')->style;
         /*echo '<link rel="stylesheet" href="'.Helper::options()->pluginUrl.'/HighLight/styles/'.$style.'">';*/
         /*echo '<script src="'.Helper::options()->pluginUrl.'/HighLight/highlight.pack.js"></script>';*/
-	echo '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/'.$style.'.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+	echo '<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/'.$style.'.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
 ';
     }
 
