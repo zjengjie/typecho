@@ -47,7 +47,9 @@ class HighLight_Plugin implements Typecho_Plugin_Interface{
     public static function config(Typecho_Widget_Helper_Form $form){
         $styles = self::getStyleList();
         $style = new Typecho_Widget_Helper_Form_Element_Select('style', $styles, null, _t('选择样式配置文件'));
+        $version = new Typecho_Widget_Helper_Form_Element_Text('version');
         $form->addInput($style);
+        $form->addInput($version);
     }
 
     /**
