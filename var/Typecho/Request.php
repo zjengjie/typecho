@@ -219,8 +219,10 @@ class Typecho_Request
     {
         if (empty(self::$_urlPrefix)) {
             self::$_urlPrefix = (self::isSecure() ? 'https' : 'http') 
-                . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'])
-                . (in_array($_SERVER['SERVER_PORT'], array(80, 443)) ? '' : ':' . $_SERVER['SERVER_PORT']);
+                . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 
+                    ($_SERVER['SERVER_NAME'] . (in_array($_SERVER['SERVER_PORT'], array(80, 443)) 
+                        ? '' : ':' . $_SERVER['SERVER_PORT']))
+                );
         }
 
         return self::$_urlPrefix;
@@ -437,13 +439,16 @@ class Typecho_Request
             $requestUri = $_SERVER['UNENCODED_URL'];
         } elseif (isset($_SERVER['REQUEST_URI'])) {
             $requestUri = $_SERVER['REQUEST_URI'];
+            $parts       = @parse_url($requestUri);
+            
             if (isset($_SERVER['HTTP_HOST']) && strstr($requestUri, $_SERVER['HTTP_HOST'])) {
-                $parts       = @parse_url($requestUri);
-
                 if (false !== $parts) {
                     $requestUri  = (empty($parts['path']) ? '' : $parts['path'])
                                  . ((empty($parts['query'])) ? '' : '?' . $parts['query']);
                 }
+            } elseif (!empty($_SERVER['QUERY_STRING']) && empty($parts['query'])) {
+                // fix query missing
+                $requestUri .= '?' . $_SERVER['QUERY_STRING'];
             }
         } elseif (isset($_SERVER['ORIG_PATH_INFO'])) { // IIS 5.0, PHP as CGI
             $requestUri = $_SERVER['ORIG_PATH_INFO'];
