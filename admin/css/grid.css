@@ -302,7 +302,7 @@
 @media (min-width: 992px) {
   /* line 115, ../scss/grid.scss */
   .container {
-    max-width: 952px; }
+    max-width: 1000px; }
 
   /* line 121, ../scss/grid.scss */
   .col-1 {
